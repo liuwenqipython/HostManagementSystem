@@ -1,0 +1,41 @@
+NEW_FILE_CODE
+# 主机管理系统
+
+基于 Python、Django 和 Celery 的企业级主机管理系统。
+
+## 功能特性
+
+1. **主机管理**：管理企业内主机、城市、机房等信息
+2. **RESTful API**：提供完整的增删改查接口
+3. **主机探测**：Ping 检测主机可达性
+4. **密码管理**：自动定期修改主机 Root 密码并加密存储
+5. **数据统计**：每日统计各城市机房主机数量
+6. **请求监控**：中间件统计每个请求的耗时
+
+## 技术栈
+
+- Python 3.8+
+- Django 4.2.7
+- Django REST Framework
+- Celery 5.3.4
+- Redis（消息队列）
+
+## 安装步骤
+
+### 1. 安装依赖
+pip install -r requirements.txt
+
+### 2. 配置 Redis
+确保 Redis 服务正在运行：
+
+### 3. 数据库迁移
+python manage.py makemigrations
+python manage.py migrate
+
+### 4. 启动服务
+启动 Django 开发服务器
+    python manage.py runserver
+启动 Celery Worker：
+    celery -A host_management worker --loglevel=info
+启动 Celery Beat（定时任务调度器）：
+    celery -A host_management beat --loglevel=info

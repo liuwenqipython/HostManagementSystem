@@ -1,0 +1,95 @@
+## API 接口文档
+
+### 城市管理
+
+- `GET /api/cities/` - 获取城市列表
+- `POST /api/cities/` - 创建城市
+- `GET /api/cities/{id}/` - 获取城市详情
+- `PUT /api/cities/{id}/` - 更新城市
+- `DELETE /api/cities/{id}/` - 删除城市
+
+### 机房管理
+
+- `GET /api/datacenters/` - 获取机房列表
+- `POST /api/datacenters/` - 创建机房
+- `GET /api/datacenters/{id}/` - 获取机房详情
+- `PUT /api/datacenters/{id}/` - 更新机房
+- `DELETE /api/datacenters/{id}/` - 删除机房
+
+### 主机管理
+
+- `GET /api/hosts/` - 获取主机列表
+- `POST /api/hosts/` - 创建主机
+- `GET /api/hosts/{id}/` - 获取主机详情
+- `PUT /api/hosts/{id}/` - 更新主机
+- `DELETE /api/hosts/{id}/` - 删除主机
+- `GET /api/hosts/{id}/ping/` - Ping 检测单个主机
+- `GET /api/hosts/ping_all/` - Ping 检测所有活跃主机
+
+### 密码历史
+
+- `GET /api/password-histories/` - 获取密码历史列表
+- `GET /api/password-histories/{id}/` - 获取密码历史详情
+
+### 统计数据
+
+- `GET /api/statistics/` - 获取统计数据列表
+- `GET /api/statistics/by_date/` - 按日期查询统计数据
+
+## 定时任务
+
+系统包含两个定时任务：
+
+1. **密码修改任务**：每 8 小时自动修改所有活跃主机的 Root 密码
+2. **统计任务**：每天 00:00 统计各城市和机房的主机数量
+
+## 数据模型
+
+### City（城市）
+- name: 城市名称
+- code: 城市代码
+
+### DataCenter（机房）
+- name: 机房名称
+- code: 机房代码
+- city: 所属城市（外键）
+- address: 机房地址
+
+### Host（主机）
+- hostname: 主机名
+- ip_address: IP地址
+- city: 所在城市（外键）
+- datacenter: 所在机房（外键）
+- root_password: Root密码（加密存储）
+- is_active: 是否激活
+- description: 描述
+
+### PasswordHistory（密码历史）
+- host: 主机（外键）
+- encrypted_password: 加密后的密码
+- changed_at: 修改时间
+- is_current: 是否当前密码
+
+### HostStatistics（主机统计）
+- city: 城市（外键）
+- datacenter: 机房（外键）
+- host_count: 主机数量
+- stat_date: 统计日期
+
+## 安全说明
+
+- 所有密码使用 Django 内置的 PBKDF2 算法加密存储
+- 密码历史记录用于审计和追溯
+- 建议在生产环境中更改 SECRET_KEY
+- 建议配置 HTTPS
+
+## 日志
+
+请求耗时日志保存在 `request_time.log` 文件中。
+
+## 注意事项
+
+1. Windows 环境下需要安装 Redis 才能运行 Celery
+2. Ping 功能在 Windows 和 Linux 下均可正常工作
+3. 首次创建主机时如未提供密码，系统会自动生成随机密码
+4. 生产环境建议使用 PostgreSQL 或 MySQL 数据库

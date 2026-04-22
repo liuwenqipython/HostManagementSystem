@@ -1,0 +1,16 @@
+[2026-04-22 16:42:29] GET / - 118.13ms - Status: 404
+[2026-04-22 16:42:29] GET /favicon.ico - 27.37ms - Status: 404
+[2026-04-22 17:05:20] GET /api/ - 16.19ms - Status: 200
+[2026-04-22 17:05:21] GET /favicon.ico - 96.45ms - Status: 404
+[2026-04-22 17:05:44] GET /admin/ - 44.58ms - Status: 302
+[2026-04-22 17:05:44] GET /admin/login/ - 65.71ms - Status: 200
+[2026-04-22 17:05:52] POST /admin/login/ - 644.04ms - Status: 200
+[2026-04-22 17:07:59] POST /admin/login/ - 1438.30ms - Status: 302
+[2026-04-22 17:07:59] GET /admin/ - 65.96ms - Status: 200
+[2026-04-22 17:08:05] GET /admin/auth/user/ - 227.43ms - Status: 500
+[2026-04-22 17:08:07] GET /admin/ - 26.39ms - Status: 200
+[2026-04-22 17:08:08] GET /admin/auth/group/ - 201.11ms - Status: 500
+[2026-04-22 17:08:09] GET /admin/ - 25.62ms - Status: 200
+[2026-04-22 17:08:16] GET /admin/django_celery_beat/solarschedule/ - 162.76ms - Status: 500
+[2026-04-22 17:08:17] GET /admin/ - 27.39ms - Status: 200
+[2026-04-22 17:13:10] GET /api/ - 5.32ms - Status: 200

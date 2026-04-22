@@ -1,0 +1,5 @@
+django==4.2.7
+celery==5.3.4
+redis==5.0.1
+django-celery-beat==2.5.0
+djangorestframework==3.17.1
