@@ -36,6 +36,6 @@ python manage.py migrate
 启动 Django 开发服务器
     python manage.py runserver
 启动 Celery Worker：
-    celery -A host_management worker --loglevel=info
+    celery -A HostManagementSystem worker --loglevel=info
 启动 Celery Beat（定时任务调度器）：
-    celery -A host_management beat --loglevel=info
+    celery -A HostManagementSystem beat --loglevel=info
